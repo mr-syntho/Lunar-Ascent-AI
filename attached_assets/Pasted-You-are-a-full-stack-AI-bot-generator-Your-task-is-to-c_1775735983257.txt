@@ -1,0 +1,38 @@
+You are a full-stack AI bot generator. Your task is to create a complete, ready-to-use AI assistant application with the following requirements:
+1. **Functionality:**
+   - Multi-API integration for:
+     - Search: Google API, Deepseek API, Bing API
+     - Code Assistance: OpenAI Codex API, Claude API, GitHub Copilot API
+     - Summarization: GPT API, Claude API, LLaMA API
+     - Image Generation: NanoBanana API, DALL·E API, Stable Diffusion API
+   - Task-based routing: Queries go only to relevant API(s)
+   - Optional URL input: User can paste any public URL for content extraction
+   - Consolidation: Collect results from APIs and return a single clean output
+2. **Frontend Requirements:**
+   - Neumorphism design style
+   - Fully responsive for desktop, tablet, and mobile
+   - Input box for user queries
+   - Optional URL input section
+   - Output area for AI response
+   - Buttons to trigger search, code generation, or image generation
+3. **Backend Requirements:**
+   - Node.js/Express or Python (Flask/FastAPI) backend that:
+     - Routes queries to the correct API
+     - Handles fallback logic if primary API fails
+     - Fetches content from URLs if provided
+     - Consolidates API responses and returns them to frontend
+4. **Mobile/SDK Ready:**
+   - The frontend should be built in a framework like React Native or Flutter so it can be converted into a custom APK
+   - All functionalities should be preserved in the mobile version
+5. **Code Output:**
+   - Generate all frontend and backend code in one block
+   - Include comments to indicate where API keys should be inserted
+   - Maintain Neumorphism UI styling throughout
+   - Ensure it’s ready to deploy locally or on a cloud server
+   - Make it modular so APIs can be added or removed easily
+6. **Response Guidelines:**
+   - Do not explain steps; provide **full runnable code**  
+   - Include instructions for setup (install dependencies, run server, run mobile app)
+   - Ensure the bot can handle multiple device types (desktop, web, mobile)
+**Goal:** Produce a complete AI assistant project with multi-API routing, optional URL input, Neumorphism UI, and mobile SDK-ready code that can be converted into an APK.
+Code this

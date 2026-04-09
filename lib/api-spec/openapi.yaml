@@ -3,13 +3,17 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: AI Assistant API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: ai
+    description: AI query operations
+  - name: history
+    description: Query history operations
 paths:
   /healthz:
     get:
@@ -24,6 +28,103 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /ai/query:
+    post:
+      operationId: aiQuery
+      tags: [ai]
+      summary: Send a query to the AI assistant
+      description: Routes the query to relevant APIs based on task type and returns consolidated response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiQueryRequest"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiQueryResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /ai/history:
+    get:
+      operationId: getHistory
+      tags: [history]
+      summary: Get query history
+      description: Returns recent AI query history
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+        - in: query
+          name: taskType
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: History list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryItem"
+
+  /ai/history/{id}:
+    delete:
+      operationId: deleteHistoryItem
+      tags: [history]
+      summary: Delete a history item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /ai/history/clear:
+    delete:
+      operationId: clearHistory
+      tags: [history]
+      summary: Clear all history
+      responses:
+        "204":
+          description: Cleared
+
+  /ai/stats:
+    get:
+      operationId: getStats
+      tags: [history]
+      summary: Get usage statistics
+      description: Returns stats about AI usage by task type
+      responses:
+        "200":
+          description: Usage stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageStats"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +135,102 @@ components:
       required:
         - status
 
+    AiQueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The user's query text
+        taskType:
+          type: string
+          enum: [search, code, summarize, image]
+          description: The type of task to perform
+        url:
+          type: ["string", "null"]
+          description: Optional URL for content extraction
+      required:
+        - query
+        - taskType
+
+    AiQueryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        query:
+          type: string
+        taskType:
+          type: string
+        result:
+          type: string
+          description: The consolidated AI response text
+        imageUrl:
+          type: ["string", "null"]
+          description: Generated image URL (for image task type)
+        sources:
+          type: array
+          items:
+            type: string
+          description: APIs that were used to generate this response
+        createdAt:
+          type: string
+      required:
+        - id
+        - query
+        - taskType
+        - result
+        - sources
+        - createdAt
+
+    HistoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        query:
+          type: string
+        taskType:
+          type: string
+        result:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        sources:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - query
+        - taskType
+        - result
+        - sources
+        - createdAt
+
+    UsageStats:
+      type: object
+      properties:
+        totalQueries:
+          type: integer
+        byTaskType:
+          type: object
+          additionalProperties:
+            type: integer
+        recentActivity:
+          type: array
+          items:
+            $ref: "#/components/schemas/HistoryItem"
+      required:
+        - totalQueries
+        - byTaskType
+        - recentActivity
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
