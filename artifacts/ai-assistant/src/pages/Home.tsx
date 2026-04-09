@@ -90,8 +90,8 @@ export default function Home() {
             <Cpu className="w-4 h-4 text-primary" />
           </div>
           <div>
-            <h1 className="text-base font-bold tracking-tight leading-none">AI Command Center</h1>
-            <p className="text-xs text-muted-foreground mt-0.5">Multi-API routing assistant</p>
+            <h1 className="text-base font-bold tracking-tight leading-none">Lunar Ascent</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">Licensed to Labibuddin Pranto</p>
           </div>
         </div>
 
