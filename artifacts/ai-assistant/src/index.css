@@ -200,3 +200,21 @@
 .neu-input {
   @apply rounded-xl bg-background shadow-neumorphic-inset border-transparent focus:border-primary/30 outline-none transition-all duration-300 px-4 py-3;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 9999px;
+}
