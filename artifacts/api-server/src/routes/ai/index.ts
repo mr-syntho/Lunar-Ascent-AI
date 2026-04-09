@@ -71,7 +71,7 @@ router.post("/ai/query", async (req, res): Promise<void> => {
     return;
   }
 
-  const { query, taskType, url } = parsed.data;
+  const { query, taskType, url, botApiKey, botProvider, botModel, botName } = parsed.data;
 
   let contextContent = "";
   if (url) {
@@ -82,15 +82,31 @@ router.post("/ai/query", async (req, res): Promise<void> => {
     }
   }
 
-  const sources = getSourcesForTaskType(taskType);
+  const effectiveProvider = botProvider ?? (taskType === "search" ? "deepseek" : "openai");
+  const effectiveKey = botApiKey
+    ? botApiKey
+    : effectiveProvider === "deepseek"
+      ? (process.env.DEEPSEEK_API_KEY ?? "missing")
+      : (process.env.OPENAI_API_KEY ?? "missing");
+
+  const activeClient =
+    effectiveProvider === "deepseek"
+      ? (botApiKey ? new OpenAI({ apiKey: effectiveKey, baseURL: "https://api.deepseek.com" }) : deepseekClient)
+      : (botApiKey ? new OpenAI({ apiKey: effectiveKey }) : openaiClient);
+
+  const sources = botName
+    ? [botName]
+    : getSourcesForTaskType(taskType);
 
   if (taskType === "image") {
+    const imgClient = botApiKey ? new OpenAI({ apiKey: botApiKey }) : openaiClient;
+    const imgModel = botModel ?? "dall-e-3";
     let imageUrl: string | null = null;
     let result = "";
 
     try {
-      const response = await openaiClient.images.generate({
-        model: "dall-e-3",
+      const response = await imgClient.images.generate({
+        model: imgModel,
         prompt: query,
         n: 1,
         size: "1024x1024",
@@ -100,12 +116,12 @@ router.post("/ai/query", async (req, res): Promise<void> => {
       const b64 = response.data[0]?.b64_json;
       if (b64) {
         imageUrl = `data:image/png;base64,${b64}`;
-        result = `Image generated via OpenAI DALL-E 3 for prompt: "${query}"`;
+        result = `Image generated via ${botName ?? "DALL-E 3"} for prompt: "${query}"`;
       } else {
         result = "Image was generated but the data could not be retrieved. Please try again.";
       }
     } catch (err) {
-      req.log.error({ err }, "DALL-E 3 image generation failed");
+      req.log.error({ err }, "Image generation failed");
       result = `Image generation encountered an error for: "${query}". Please try rephrasing your prompt.`;
     }
 
@@ -131,29 +147,20 @@ router.post("/ai/query", async (req, res): Promise<void> => {
     ? `${query}\n\n---\nExtracted content from ${url}:\n${contextContent}`
     : query;
 
-  let result = "";
+  const defaultModel =
+    effectiveProvider === "deepseek" ? "deepseek-chat" : "gpt-4o";
+  const model = botModel ?? defaultModel;
 
-  if (taskType === "search") {
-    const completion = await deepseekClient.chat.completions.create({
-      model: "deepseek-chat",
-      max_tokens: 4096,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userMessage },
-      ],
-    });
-    result = completion.choices[0]?.message?.content ?? "No response generated.";
-  } else {
-    const completion = await openaiClient.chat.completions.create({
-      model: "gpt-4o",
-      max_tokens: 4096,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userMessage },
-      ],
-    });
-    result = completion.choices[0]?.message?.content ?? "No response generated.";
-  }
+  const completion = await activeClient.chat.completions.create({
+    model,
+    max_tokens: 4096,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userMessage },
+    ],
+  });
+
+  const result = completion.choices[0]?.message?.content ?? "No response generated.";
 
   const [saved] = await db
     .insert(queriesTable)

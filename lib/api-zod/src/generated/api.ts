@@ -25,6 +25,10 @@ export const AiQueryBody = zod.object({
     .enum(["search", "code", "summarize", "image"])
     .describe("The type of task to perform"),
   url: zod.string().nullish().describe("Optional URL for content extraction"),
+  botApiKey: zod.string().nullish().describe("Custom bot API key override"),
+  botProvider: zod.enum(["openai", "deepseek"]).nullish().describe("Bot provider override"),
+  botModel: zod.string().nullish().describe("Custom model override"),
+  botName: zod.string().nullish().describe("Bot display name for result attribution"),
 });
 
 export const AiQueryResponse = zod.object({

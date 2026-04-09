@@ -201,6 +201,14 @@
   @apply rounded-xl bg-background shadow-neumorphic-inset border-transparent focus:border-primary/30 outline-none transition-all duration-300 px-4 py-3;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--border)) transparent;
