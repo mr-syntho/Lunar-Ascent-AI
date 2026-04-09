@@ -22,10 +22,9 @@ export interface UserProfile {
   avatarInitials: string;
 }
 
-const PROVIDER_OPTIONS = [
-  { value: "openai" as const, label: "OpenAI", defaultModel: "gpt-4o" },
-  { value: "deepseek" as const, label: "DeepSeek", defaultModel: "deepseek-chat" },
-];
+function detectProvider(model: string): "openai" | "deepseek" {
+  return model.toLowerCase().includes("deepseek") ? "deepseek" : "openai";
+}
 
 const TASK_OPTIONS: { type: TaskType; label: string }[] = [
   { type: "search", label: "Search" },
@@ -66,11 +65,6 @@ function BotEditor({ bot, onChange, onDelete }: BotEditorProps) {
       ...bot,
       tasks: already ? bot.tasks.filter((t) => t !== task) : [...bot.tasks, task],
     });
-  };
-
-  const setProvider = (provider: "openai" | "deepseek") => {
-    const pm = PROVIDER_OPTIONS.find((p) => p.value === provider);
-    onChange({ ...bot, provider, model: pm?.defaultModel ?? bot.model });
   };
 
   return (
