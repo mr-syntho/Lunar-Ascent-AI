@@ -72,135 +72,154 @@
   --shadow-neumorphic-hover: var(--shadow-neumorphic-hover);
 }
 
-/* LIGHT MODE */
+/* ── LIGHT MODE ── Soft warm-grey base, very gentle depth */
 :root {
-  --background: 220 25% 92%;
-  --foreground: 220 25% 20%;
-  --border: 220 25% 85%;
-  --card: 220 25% 92%;
-  --card-foreground: 220 25% 20%;
-  --card-border: 220 25% 85%;
-  --sidebar: 220 25% 90%;
-  --sidebar-foreground: 220 25% 20%;
-  --sidebar-border: 220 25% 85%;
-  --sidebar-primary: 220 80% 50%;
-  --sidebar-primary-foreground: 220 25% 98%;
-  --sidebar-accent: 220 25% 85%;
-  --sidebar-accent-foreground: 220 25% 20%;
-  --sidebar-ring: 220 80% 50%;
-  --popover: 220 25% 92%;
-  --popover-foreground: 220 25% 20%;
-  --popover-border: 220 25% 85%;
-  --primary: 220 80% 50%;
-  --primary-foreground: 220 25% 98%;
-  --secondary: 220 25% 85%;
-  --secondary-foreground: 220 25% 20%;
-  --muted: 220 25% 85%;
-  --muted-foreground: 220 25% 40%;
-  --accent: 220 25% 85%;
-  --accent-foreground: 220 25% 20%;
-  --destructive: 0 80% 50%;
-  --destructive-foreground: 0 25% 98%;
-  --input: 220 25% 85%;
-  --ring: 220 80% 50%;
-  --chart-1: 220 80% 50%;
-  --chart-2: 200 80% 50%;
-  --chart-3: 180 80% 50%;
-  --chart-4: 160 80% 50%;
-  --chart-5: 140 80% 50%;
+  --background: 220 18% 93%;
+  --foreground: 220 20% 22%;
+  --border: 220 15% 87%;
+  --card: 220 18% 93%;
+  --card-foreground: 220 20% 22%;
+  --card-border: 220 15% 87%;
+  --sidebar: 220 18% 91%;
+  --sidebar-foreground: 220 20% 22%;
+  --sidebar-border: 220 15% 87%;
+  --sidebar-primary: 221 70% 52%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 15% 87%;
+  --sidebar-accent-foreground: 220 20% 22%;
+  --sidebar-ring: 221 70% 52%;
+  --popover: 220 18% 93%;
+  --popover-foreground: 220 20% 22%;
+  --popover-border: 220 15% 87%;
+  --primary: 221 70% 52%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 15% 87%;
+  --secondary-foreground: 220 20% 22%;
+  --muted: 220 15% 88%;
+  --muted-foreground: 220 12% 46%;
+  --accent: 220 15% 87%;
+  --accent-foreground: 220 20% 22%;
+  --destructive: 0 72% 54%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 220 15% 87%;
+  --ring: 221 70% 52%;
+  --chart-1: 221 70% 52%;
+  --chart-2: 200 70% 50%;
+  --chart-3: 180 65% 45%;
+  --chart-4: 152 60% 44%;
+  --chart-5: 130 55% 44%;
 
-  --app-font-sans: 'Inter', sans-serif;
+  --app-font-sans: 'Inter', system-ui, sans-serif;
   --app-font-serif: Georgia, serif;
-  --app-font-mono: 'Fira Code', monospace;
-  --radius: 1rem;
+  --app-font-mono: 'Fira Code', 'Cascadia Code', monospace;
+  --radius: 0.875rem;
   --spacing: 0.25rem;
 
-  --neu-light: #ffffff;
-  --neu-dark: #d1d5db;
+  /* Softer shadows — less contrast, more whisper */
+  --neu-light: rgba(255, 255, 255, 0.88);
+  --neu-dark: rgba(174, 181, 196, 0.72);
 
-  --shadow-neumorphic: 8px 8px 16px var(--neu-dark), -8px -8px 16px var(--neu-light);
-  --shadow-neumorphic-hover: 4px 4px 8px var(--neu-dark), -4px -4px 8px var(--neu-light);
-  --shadow-neumorphic-inset: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
-  --shadow-neumorphic-sm: 4px 4px 8px var(--neu-dark), -4px -4px 8px var(--neu-light);
-  --shadow-neumorphic-inset-sm: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+  --shadow-neumorphic: 5px 5px 14px var(--neu-dark), -5px -5px 14px var(--neu-light);
+  --shadow-neumorphic-hover: 3px 3px 8px var(--neu-dark), -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-inset: inset 3px 3px 8px var(--neu-dark), inset -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-sm: 3px 3px 8px var(--neu-dark), -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-inset-sm: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 5px var(--neu-light);
 }
 
+/* ── DARK MODE ── Deep slate, still gentle */
 .dark {
-  --background: 220 20% 16%;
-  --foreground: 220 20% 92%;
-  --border: 220 20% 22%;
-  --card: 220 20% 16%;
-  --card-foreground: 220 20% 92%;
-  --card-border: 220 20% 22%;
-  --sidebar: 220 20% 14%;
-  --sidebar-foreground: 220 20% 92%;
-  --sidebar-border: 220 20% 22%;
-  --sidebar-primary: 220 80% 60%;
-  --sidebar-primary-foreground: 220 20% 10%;
-  --sidebar-accent: 220 20% 22%;
-  --sidebar-accent-foreground: 220 20% 92%;
-  --sidebar-ring: 220 80% 60%;
-  --popover: 220 20% 16%;
-  --popover-foreground: 220 20% 92%;
-  --popover-border: 220 20% 22%;
-  --primary: 220 80% 60%;
-  --primary-foreground: 220 20% 10%;
-  --secondary: 220 20% 22%;
-  --secondary-foreground: 220 20% 92%;
-  --muted: 220 20% 22%;
-  --muted-foreground: 220 20% 60%;
-  --accent: 220 20% 22%;
-  --accent-foreground: 220 20% 92%;
-  --destructive: 0 80% 60%;
-  --destructive-foreground: 0 20% 10%;
-  --input: 220 20% 22%;
-  --ring: 220 80% 60%;
-  --chart-1: 220 80% 60%;
-  --chart-2: 200 80% 60%;
-  --chart-3: 180 80% 60%;
-  --chart-4: 160 80% 60%;
-  --chart-5: 140 80% 60%;
+  --background: 222 20% 14%;
+  --foreground: 220 18% 90%;
+  --border: 220 16% 21%;
+  --card: 222 20% 14%;
+  --card-foreground: 220 18% 90%;
+  --card-border: 220 16% 21%;
+  --sidebar: 222 20% 12%;
+  --sidebar-foreground: 220 18% 90%;
+  --sidebar-border: 220 16% 21%;
+  --sidebar-primary: 221 65% 62%;
+  --sidebar-primary-foreground: 222 20% 10%;
+  --sidebar-accent: 220 16% 21%;
+  --sidebar-accent-foreground: 220 18% 90%;
+  --sidebar-ring: 221 65% 62%;
+  --popover: 222 20% 14%;
+  --popover-foreground: 220 18% 90%;
+  --popover-border: 220 16% 21%;
+  --primary: 221 65% 62%;
+  --primary-foreground: 222 20% 10%;
+  --secondary: 220 16% 21%;
+  --secondary-foreground: 220 18% 90%;
+  --muted: 220 16% 22%;
+  --muted-foreground: 220 12% 56%;
+  --accent: 220 16% 21%;
+  --accent-foreground: 220 18% 90%;
+  --destructive: 0 68% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 220 16% 21%;
+  --ring: 221 65% 62%;
+  --chart-1: 221 65% 62%;
+  --chart-2: 200 65% 58%;
+  --chart-3: 180 62% 52%;
+  --chart-4: 152 58% 50%;
+  --chart-5: 130 52% 50%;
 
-  --neu-light: rgba(255, 255, 255, 0.05);
-  --neu-dark: rgba(0, 0, 0, 0.5);
+  --neu-light: rgba(255, 255, 255, 0.04);
+  --neu-dark: rgba(0, 0, 0, 0.42);
 
-  --shadow-neumorphic: 8px 8px 16px var(--neu-dark), -8px -8px 16px var(--neu-light);
-  --shadow-neumorphic-hover: 4px 4px 8px var(--neu-dark), -4px -4px 8px var(--neu-light);
-  --shadow-neumorphic-inset: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
-  --shadow-neumorphic-sm: 4px 4px 8px var(--neu-dark), -4px -4px 8px var(--neu-light);
-  --shadow-neumorphic-inset-sm: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+  --shadow-neumorphic: 5px 5px 14px var(--neu-dark), -5px -5px 14px var(--neu-light);
+  --shadow-neumorphic-hover: 3px 3px 8px var(--neu-dark), -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-inset: inset 3px 3px 8px var(--neu-dark), inset -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-sm: 3px 3px 8px var(--neu-dark), -3px -3px 8px var(--neu-light);
+  --shadow-neumorphic-inset-sm: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 5px var(--neu-light);
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
 
+/* ── Neumorphic utility classes ── */
 .neu-panel {
-  @apply rounded-2xl bg-background shadow-neumorphic border border-white/20 dark:border-white/5 transition-all duration-300;
+  @apply bg-background border border-white/30 dark:border-white/[0.04] transition-all duration-200;
+  box-shadow: var(--shadow-neumorphic);
 }
 
 .neu-panel-inset {
-  @apply rounded-2xl bg-background shadow-neumorphic-inset border border-white/10 dark:border-black/20 transition-all duration-300;
+  @apply bg-background border border-black/[0.04] dark:border-white/[0.03] transition-all duration-200;
+  box-shadow: var(--shadow-neumorphic-inset);
 }
 
 .neu-button {
-  @apply rounded-xl bg-background shadow-neumorphic border border-white/20 dark:border-white/5 transition-all duration-200 active:shadow-neumorphic-inset hover:shadow-neumorphic-hover;
+  @apply bg-background border border-white/30 dark:border-white/[0.04] transition-all duration-150;
+  box-shadow: var(--shadow-neumorphic-sm);
+}
+.neu-button:hover {
+  box-shadow: var(--shadow-neumorphic-hover);
+}
+.neu-button:active {
+  box-shadow: var(--shadow-neumorphic-inset-sm);
 }
 
 .neu-button-active {
-  @apply rounded-xl bg-background shadow-neumorphic-inset border border-white/10 dark:border-black/20 text-primary transition-all duration-200;
+  @apply bg-background border border-black/[0.05] dark:border-white/[0.03] transition-all duration-150;
+  box-shadow: var(--shadow-neumorphic-inset);
 }
 
 .neu-input {
-  @apply rounded-xl bg-background shadow-neumorphic-inset border-transparent focus:border-primary/30 outline-none transition-all duration-300 px-4 py-3;
+  @apply bg-background border border-transparent outline-none transition-all duration-200 px-4 py-3;
+  box-shadow: var(--shadow-neumorphic-inset);
+  border-radius: calc(var(--radius) - 2px);
+}
+.neu-input:focus {
+  border-color: hsl(var(--primary) / 0.25);
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 1px hsl(var(--primary) / 0.15);
 }
 
+/* ── Scrollbars ── */
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -213,16 +232,23 @@
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--border)) transparent;
 }
-
 .custom-scrollbar::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: hsl(var(--border));
   border-radius: 9999px;
+}
+
+/* ── Textarea auto-resize ── */
+.auto-textarea {
+  field-sizing: content;
+  min-height: 44px;
+  max-height: 200px;
+  overflow-y: auto;
+  resize: none;
+  line-height: 1.6;
 }
